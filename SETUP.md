@@ -38,7 +38,7 @@ Key paths:
 *   `js/`: Game logic split into state, rendering, input, audio, scenes, entities, and level data.
 *   `assets/music/`: Runtime music tracks.
 *   `assets/portraits/`: Runtime character portraits.
-*   `tests/`: Node, browser, and Playwright-oriented test helpers.
+*   `tests/`: Node test and benchmark helpers.
 *   `deployment/`: Optional self-hosting templates and scripts.
 
 ---
@@ -118,8 +118,6 @@ Run the benchmark helper:
 ```bash
 npm run benchmark
 ```
-
-Some browser verification files in `tests/` are intended to be opened through a local server or driven by Playwright.
 
 ---
 

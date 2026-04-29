@@ -99,8 +99,6 @@ Run the benchmark helper:
 npm run benchmark
 ```
 
-Some browser-oriented verification files in `tests/` are meant to be opened through the same local HTTP server used to play the game.
-
 ## Deployment
 
 This is a static web project. Any host that can serve HTML, CSS, JavaScript, images, and MP3 files can host it.

@@ -11,7 +11,6 @@ function check(description, condition) {
 const main = read('js/main.js');
 const renderer = read('js/renderer.js');
 const index = read('index.html');
-const fixture = read('tests/verify_dev_unlock.html');
 const readme = read('README.md');
 const setup = read('SETUP.md');
 const vpsSetup = read('deployment/VPS_SETUP.md');
@@ -25,7 +24,6 @@ check('HUD health hearts render through SVG helper', main.includes('function get
 
 check('index dialogue continue indicator uses SVG instead of text symbol', /id="dialogue-continue"[\s\S]*<svg/.test(index));
 check('index elixir indicators use SVG instead of emoji', !index.includes('🥛') && /id="elixir-icon"[\s\S]*<svg/.test(index));
-check('dev unlock fixture mirrors SVG elixir indicators', !fixture.includes('🥛') && /id="elixir-icon"[\s\S]*<svg/.test(fixture));
 
 check('renderer has reusable canvas icon helper', renderer.includes('function drawIcon'));
 check('renderer power-up labels no longer depend on emoji glyphs', !/[⚡🛡️🔥❤️🎯✨]/u.test(renderer));
