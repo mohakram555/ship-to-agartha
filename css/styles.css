@@ -1,0 +1,707 @@
+/* ========================================
+   AGARTHA: FALSE GUIDE - Styles
+   Clean / Sleek / Professional
+   ======================================== */
+
+:root {
+    /* Color Palette */
+    --bg-color: #0a0a0f;
+    --overlay-bg-color: rgba(10, 10, 15, 0.98);
+    --panel-bg-color: rgba(15, 15, 20, 0.95);
+
+    --ui-bg-color: #1a1a1f;
+    --ui-bg-hover-color: #252530;
+    --ui-bg-disabled: #0f0f12;
+
+    --border-color: #333;
+    --border-dim-color: #2a2a30;
+    --border-hover-color: #555;
+
+    --text-color: #e0e0e0;
+    --text-bright-color: #ffffff;
+    --text-dim-color: #888;
+    --text-muted-color: #666;
+
+    --accent-color: #c9a227;
+    --accent-hover-color: #d4b02a;
+    --accent-border-color: #3a3520;
+    --accent-glow-color: rgba(201, 162, 39, 0.4);
+    --accent-glow-inner: rgba(201, 162, 39, 0.1);
+
+    --danger-color: #e53935;
+
+    /* Fonts */
+    --font-main: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    overflow: hidden;
+    font-family: var(--font-main);
+    touch-action: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    color: var(--text-color);
+}
+
+/* ========================================
+   Game Container
+   ======================================== */
+
+#game-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    /* Mobile browser address bar fix */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-color);
+}
+
+#game-canvas {
+    display: block;
+    background: transparent;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========================================
+   Dialogue Box
+   ======================================== */
+
+#dialogue-box {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    height: 160px;
+    background: var(--panel-bg-color);
+    border: 1px solid var(--border-color);
+    display: flex;
+    padding: 16px;
+    z-index: 100;
+}
+
+#dialogue-portrait {
+    width: 128px;
+    height: 128px;
+    background: var(--ui-bg-color);
+    border: 1px solid var(--border-dim-color);
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+#dialogue-content {
+    flex: 1;
+    margin-left: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#dialogue-speaker {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dim-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+#dialogue-text {
+    font-size: 15px;
+    color: var(--text-color);
+    line-height: 1.6;
+    flex: 1;
+}
+
+#dialogue-continue {
+    position: absolute;
+    bottom: 4px;
+    right: 8px;
+    color: var(--text-muted-color);
+    font-size: 12px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* ========================================
+   HUD
+   ======================================== */
+
+#hud {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 50;
+}
+
+#hud-health {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.health-heart {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+}
+
+#hud-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#hud-elixir {
+    background: var(--ui-bg-color);
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+#elixir-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+#elixir-count {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+#hud-mission {
+    background: var(--ui-bg-color);
+    padding: 6px 12px;
+    font-size: 12px;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-border-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* ========================================
+   Menu Overlay
+   ======================================== */
+
+#menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--overlay-bg-color);
+    z-index: 200;
+}
+
+#game-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text-bright-color);
+    letter-spacing: 8px;
+    margin-bottom: 4px;
+}
+
+#game-subtitle {
+    font-size: 16px;
+    color: var(--text-muted-color);
+    letter-spacing: 6px;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+}
+
+#menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-btn {
+    background: var(--ui-bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 13px;
+    padding: 14px 0;
+    width: 200px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: background 0.15s, border-color 0.15s;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+}
+
+.menu-btn:hover {
+    background: var(--ui-bg-hover-color);
+    border-color: var(--border-hover-color);
+}
+
+.menu-btn:focus {
+    outline: none;
+    background: var(--ui-bg-hover-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-glow-color),
+        inset 0 0 8px var(--accent-glow-inner);
+}
+
+.menu-btn:active {
+    background: var(--ui-bg-color);
+}
+
+/* ========================================
+   Loading Overlay
+   ======================================== */
+
+#loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-color);
+    z-index: 300;
+}
+
+#loading-text {
+    font-size: 14px;
+    color: var(--text-muted-color);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+}
+
+/* ========================================
+   Mobile Responsive
+   ======================================== */
+
+@media (max-width: 600px) {
+    #game-title {
+        font-size: 32px;
+        letter-spacing: 4px;
+    }
+
+    #game-subtitle {
+        font-size: 12px;
+        letter-spacing: 4px;
+    }
+
+    #dialogue-box {
+        height: 140px;
+        padding: 12px;
+    }
+
+    #dialogue-portrait {
+        width: 100px;
+        height: 100px;
+    }
+
+    #dialogue-speaker {
+        font-size: 12px;
+    }
+
+    #dialogue-text {
+        font-size: 13px;
+    }
+
+    .menu-btn {
+        font-size: 12px;
+        padding: 12px 32px;
+    }
+}
+
+/* ========================================
+   Overlay Bases (Level Select & Upgrades)
+   ======================================== */
+
+#level-select-overlay,
+#upgrades-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 250;
+    color: var(--text-color);
+    padding: 20px;
+}
+
+#level-select-overlay h2,
+#upgrades-overlay h2 {
+    font-size: 24px;
+    color: var(--text-dim-color);
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ========================================
+   Level Select Grid
+   ======================================== */
+
+#level-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.level-btn {
+    background: var(--ui-bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.level-btn:hover:not(.locked) {
+    background: var(--ui-bg-hover-color);
+    border-color: var(--border-hover-color);
+}
+
+.level-btn.locked {
+    background: var(--ui-bg-disabled);
+    border-color: var(--ui-bg-color);
+    color: var(--border-color);
+    cursor: not-allowed;
+}
+
+.level-btn:focus:not(.locked) {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 12px rgba(201, 162, 39, 0.5);
+}
+
+/* ========================================
+   Upgrades Shop
+   ======================================== */
+
+#elixir-display {
+    font-size: 18px;
+    color: var(--accent-color);
+    margin-bottom: 24px;
+    background: var(--ui-bg-color);
+    padding: 10px 20px;
+    border: 1px solid var(--accent-border-color);
+    font-weight: 600;
+}
+
+.upgrade-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--ui-bg-color);
+    border: 1px solid var(--border-dim-color);
+    width: 100%;
+    max-width: 500px;
+    padding: 16px;
+    margin-bottom: 8px;
+}
+
+.upgrade-info h3 {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.upgrade-info p {
+    color: var(--text-muted-color);
+    font-size: 12px;
+}
+
+.upgrade-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.upgrade-level {
+    font-size: 11px;
+    color: var(--text-muted-color);
+}
+
+.upgrade-btn {
+    background: var(--accent-color);
+    border: none;
+    color: var(--bg-color);
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    min-width: 90px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.15s;
+}
+
+.upgrade-btn:hover {
+    background: var(--accent-hover-color);
+}
+
+.upgrade-btn:disabled {
+    background: var(--border-dim-color);
+    color: var(--border-hover-color);
+    cursor: not-allowed;
+}
+
+.upgrade-btn:focus {
+    outline: none;
+    box-shadow: 0 0 12px rgba(201, 162, 39, 0.6);
+}
+
+/* ========================================
+   Credits Overlay
+   ======================================== */
+
+#credits-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    color: var(--text-color);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.credits-content {
+    text-align: center;
+    width: 100%;
+    animation: scrollCredits 30s linear forwards;
+    position: relative;
+    top: 100vh;
+}
+
+@keyframes scrollCredits {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-200%);
+    }
+}
+
+.credits-content h1 {
+    font-size: 36px;
+    color: var(--text-bright-color);
+    margin-bottom: 60px;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+.credit-section {
+    margin-bottom: 60px;
+}
+
+.credit-section h2 {
+    font-size: 16px;
+    color: var(--text-muted-color);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.credit-section p {
+    font-size: 14px;
+    color: var(--text-dim-color);
+    line-height: 1.8;
+}
+
+#btn-credits-menu {
+    position: absolute;
+    bottom: 40px;
+    background: var(--ui-bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 12px 32px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 210;
+    opacity: 0;
+    animation: fadeInButton 2s ease forwards;
+    animation-delay: 25s;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+#btn-credits-menu:hover {
+    background: var(--ui-bg-hover-color);
+    border-color: var(--border-hover-color);
+}
+
+@keyframes fadeInButton {
+    to {
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   Pause Overlay
+   ======================================== */
+
+#pause-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(10, 10, 15, 0.85);
+    z-index: 250;
+    backdrop-filter: blur(4px);
+}
+
+#pause-overlay h2 {
+    font-size: 32px;
+    color: var(--text-bright-color);
+    letter-spacing: 6px;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#pause-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* ========================================
+   Pause Button
+   ======================================== */
+
+#btn-pause {
+    position: absolute;
+    top: 52px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background: var(--ui-bg-color);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    z-index: 55;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    padding: 0;
+}
+
+#btn-pause .pause-bar {
+    display: inline-block;
+    width: 4px;
+    min-width: 4px;
+    height: 12px;
+    min-height: 12px;
+    background-color: #e0e0e0;
+    border-radius: 1px;
+    flex-shrink: 0;
+}
+
+#btn-pause:hover {
+    background: var(--ui-bg-hover-color);
+    border-color: var(--accent-color);
+}
+
+#btn-pause:hover .pause-bar {
+    background-color: #c9a227;
+}
+
+#btn-pause:active {
+    transform: scale(0.95);
+}
+
+#btn-pause.hidden {
+    display: none;
+}

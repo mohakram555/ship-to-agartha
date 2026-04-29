@@ -1,0 +1,35 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.claude/
+
+# Local environment and deployment secrets
+.env
+.env.*
+!.env.example
+deployment/deploy.config
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Dependencies and generated output
+node_modules/
+dist/
+build/
+coverage/
+output/
+.playwright-cli/
+tests/*.png
+
+# Release archives and temporary diagnostics
+release.tar.gz
+*.tar.gz
+*.tgz
+*.zip
+*.log
+*_screenshot.png
+error_screenshot.png
