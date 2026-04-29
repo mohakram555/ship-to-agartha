@@ -1,0 +1,22 @@
+{
+  "name": "ship-to-agartha",
+  "version": "1.0.0",
+  "description": "A narrative-driven space shooter built with vanilla JavaScript and HTML5 Canvas.",
+  "type": "module",
+  "license": "Unlicense",
+  "private": false,
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node tests/run_node.js && node tests/test_spatial.js && node tests/test_pr_integrations.js",
+    "benchmark": "node tests/run_benchmark.js"
+  },
+  "keywords": [
+    "canvas",
+    "game",
+    "javascript",
+    "space-shooter"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

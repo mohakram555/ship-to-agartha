@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agartha Tests</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1f; color: #eee; padding: 20px; }
+        .pass { color: #00ff00; }
+        .fail { color: #ff0000; }
+        .group { margin-top: 20px; font-weight: bold; font-size: 1.2em; color: #00ffff; }
+    </style>
+</head>
+<body>
+    <h1>Agartha Test Runner</h1>
+    <div id="results">Running tests...</div>
+
+    <script type="module">
+        import { runTests } from './test_core.js';
+
+        // Mock localStorage for tests if needed
+        if (!window.localStorage) {
+            window.localStorage = {
+                getItem: () => null,
+                setItem: () => {},
+                removeItem: () => {}
+            };
+        }
+
+        runTests().then(results => {
+            const container = document.getElementById('results');
+            container.innerHTML = '';
+
+            let passed = 0;
+            let failed = 0;
+
+            results.forEach(group => {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'group';
+                groupDiv.textContent = group.name;
+                container.appendChild(groupDiv);
+
+                group.tests.forEach(test => {
+                    const testDiv = document.createElement('div');
+                    testDiv.className = test.passed ? 'pass' : 'fail';
+                    testDiv.textContent = `${test.passed ? '✓' : '✗'} ${test.desc} ${test.error ? '(' + test.error + ')' : ''}`;
+                    container.appendChild(testDiv);
+                    if (test.passed) passed++; else failed++;
+                });
+            });
+
+            const summary = document.createElement('div');
+            summary.style.marginTop = '20px';
+            summary.style.borderTop = '1px solid #666';
+            summary.style.paddingTop = '10px';
+            summary.innerHTML = `Total: ${passed + failed} | <span class="pass">Passed: ${passed}</span> | <span class="fail">Failed: ${failed}</span>`;
+            container.appendChild(summary);
+        });
+    </script>
+</body>
+</html>
