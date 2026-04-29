@@ -1,27 +1,8 @@
-# AGARTHA: FALSE GUIDE - Technical & Release Report
+# Agartha: False Guide
 
-**Agartha: False Guide** is a narrative-driven space shooter web game built with vanilla JavaScript and HTML5 Canvas. The game features a 30-level campaign, a dialogue system, multiple mission types, boss fights, music, portrait-driven story scenes, and a persistent upgrade system.
+**Agartha: False Guide** is a browser-based space shooter with a story campaign, dialogue scenes, upgrades, boss fights, and procedural canvas effects. It runs as a static site, so there is no backend, account system, API key, or build step required.
 
-This repository is prepared for public use as a static web project. It does not require a backend server, API key, webhook, analytics account, or hosted third-party service to run locally.
-
-## Table of Contents
-1.  [Screenshots](#screenshots)
-2.  [Technical Report](#technical-report)
-    *   [Architecture](#architecture)
-    *   [Core Systems](#core-systems)
-    *   [Game Loop](#game-loop)
-    *   [Rendering](#rendering)
-    *   [Input Handling](#input-handling)
-    *   [Audio System](#audio-system)
-    *   [State Management](#state-management)
-    *   [Content & Level Design](#content--level-design)
-3.  [Setup Guide](#setup-guide)
-4.  [Developer Menu](#developer-menu)
-5.  [Deployment Guide](#deployment-guide)
-6.  [Project Hygiene](#project-hygiene)
-7.  [License](#license)
-
----
+The game is built with vanilla JavaScript, ES modules, HTML5 Canvas, CSS, local audio files, and portrait assets.
 
 ## Screenshots
 
@@ -29,158 +10,131 @@ This repository is prepared for public use as a static web project. It does not 
 | --- | --- | --- |
 | ![Main menu](assets/screenshots/main_menu.png) | ![Gameplay](assets/screenshots/gameplay.png) | ![Level 30 boss fight](assets/screenshots/level_30_boss.png) |
 
----
+## Features
 
-## Technical Report
+*   30-level story campaign.
+*   Mission types for survival, collection, enemy waves, and boss fights.
+*   Dialogue system with character portraits and voice ticks.
+*   Player upgrades, Elixir currency, power-ups, shields, and persistent saves.
+*   Keyboard, touch, and gamepad support.
+*   Procedural Canvas rendering for enemies, projectiles, particles, shields, and backgrounds.
+*   Web Audio music and generated sound effects.
 
-### Architecture
-The project follows a modular architecture using ES modules. The codebase is organized into functional domains:
+## Play Locally
 
-*   **Entry Point**: `index.html` serves as the game container, and `js/main.js` initializes the game loop and connects subsystems.
-*   **State Management**: `js/state.js` centralizes game state, player progress, upgrade data, and `localStorage` persistence.
-*   **Rendering**: `js/renderer.js` abstracts the HTML5 Canvas 2D API and handles visual output, effects, and procedural drawing.
-*   **Input**: `js/input.js` normalizes keyboard, mouse, gamepad, and touch input.
-*   **Audio**: `js/audio.js` manages Web Audio playback, music tracks, and procedural sound effects.
-*   **Entities**: `js/entities/` contains game object modules such as power-ups.
-*   **Data**: `js/data/levels.js` contains level configuration, enemy waves, dialogue, and mission objectives.
-*   **Scenes**: `js/scenes/story.js` manages the narrative overlay and dialogue progression.
-*   **Assets**: `assets/` contains runtime music and portrait files.
+Clone the repository:
 
-### Core Systems
+```bash
+git clone https://github.com/mohakram555/ship-to-agartha.git
+cd ship-to-agartha
+```
 
-#### Game Loop
-The game uses a standard `requestAnimationFrame` loop in `js/main.js`. It separates update and render phases so gameplay logic stays predictable across different frame rates. The loop pauses during dialogue sequences, menu screens, and pause states.
+Start a local server:
 
-#### Rendering
-Most gameplay visuals are generated procedurally at runtime using Canvas 2D drawing primitives. This keeps the core game lightweight while still supporting shields, trails, particles, enemy shapes, and dynamic backgrounds.
+```bash
+python3 -m http.server 8000
+```
 
-**Key Rendering Features:**
-*   **Procedural Enemies**: Enemies are drawn from geometric primitives and gradients.
-*   **Particle Systems**: Explosions and engine trails are handled as lightweight particles.
-*   **Dynamic Background**: `js/renderer.js` draws a scrolling starfield behind gameplay.
+Open the game:
 
-#### Input Handling
-The `Input` module exposes a unified state object that the game loop polls.
+```text
+http://localhost:8000
+```
 
-*   **Keyboard**: Arrow keys and WASD.
-*   **Gamepad**: Standard Gamepad API mappings with vibration patterns where supported.
-*   **Touch**: Mobile joystick and fire controls are rendered for touch devices.
+Do not open `index.html` directly with `file://`. Browsers often block ES module imports from local files, so the game should be served over HTTP.
 
-#### Audio System
-The `AudioManager` wraps the Web Audio API.
+## Controls
 
-*   **Music**: Loads MP3 files from `assets/music/`.
-*   **SFX**: Generates sound effects procedurally with oscillators, so gameplay still has effects without separate SFX files.
-*   **Voices**: Dialogue voice ticks are generated from lightweight patch definitions.
-
-#### State Management
-Game persistence is handled in `js/state.js`.
-
-*   **Storage**: `localStorage` saves progress, currency, and purchased upgrades.
-*   **Session State**: Runtime state tracks health, entities, mission counters, effects, and active level data.
-
-#### Content & Level Design
-Levels are defined in `js/data/levels.js` as configuration objects.
-
-*   `survive`: Survive for a set time limit.
-*   `collect`: Gather a target amount of Elixir.
-*   `destroy`: Eliminate a target number of enemies.
-*   `boss`: Defeat a boss entity.
-
-Each level can define `preDialogue` and `postDialogue` arrays to trigger narrative scenes before or after gameplay.
-
----
-
-## Setup Guide
-
-For complete setup instructions, see [SETUP.md](SETUP.md).
-
-Quick start:
-
-1.  Clone the repository.
-    ```bash
-    git clone <repository-url>
-    cd <repository-folder>
-    ```
-
-2.  Start a local HTTP server.
-    ```bash
-    python3 -m http.server 8000
-    ```
-
-3.  Open the game.
-    ```text
-    http://localhost:8000
-    ```
-
-4.  Run the JavaScript logic tests.
-    ```bash
-    npm test
-    ```
-
-The game must be served over HTTP because ES modules are blocked by many browsers when opened directly with `file://`.
-
----
+| Action | Keyboard | Gamepad | Touch |
+| --- | --- | --- | --- |
+| Move | `WASD` or arrow keys | Left stick or D-pad | On-screen joystick |
+| Fire | `Space` | Cross / primary button or right trigger | `FIRE` button |
+| Continue dialogue | `Enter` or `E` | Cross / primary button | Tap / `FIRE` button |
+| Pause | `Esc` or `P` | Options / Start | Pause button |
 
 ## Developer Menu
 
-The in-game developer menu is hidden by default. To open it:
+The developer menu is hidden during normal play, but it is available for local testing.
+
+To open it:
 
 1.  Start or continue a level.
 2.  Advance any story dialogue until the HUD is visible.
 3.  Click the mission objective in the top-right HUD three times within three seconds.
 4.  Click the `DEV` button that appears near the upper-right corner.
 
-The menu includes theme controls, balance sliders, invincibility, level navigation, restart, complete-level, and Elixir test controls. It is intended for local testing and tuning, not normal player progression.
+The menu includes theme selection, gameplay tuning sliders, invincibility, level navigation, restart, complete-level, and Elixir test controls.
 
----
+## Project Structure
 
-## Deployment Guide
+```text
+.
+├── index.html
+├── css/
+├── js/
+│   ├── data/
+│   ├── entities/
+│   └── scenes/
+├── assets/
+│   ├── music/
+│   ├── portraits/
+│   └── screenshots/
+├── tests/
+└── deployment/
+```
 
-The game is a static site. Any host that can serve `index.html`, JavaScript, CSS, images, and MP3 files can run it.
+The main entry point is `js/main.js`. Game state lives in `js/state.js`, rendering lives in `js/renderer.js`, controls live in `js/input.js`, and campaign data lives in `js/data/levels.js`.
 
-Supported options:
+## Testing
 
-*   **Static hosting**: GitHub Pages, Netlify, Vercel, Cloudflare Pages, S3 static hosting, or any similar provider.
-*   **Self-hosted VPS**: Use the optional scripts in `deployment/`.
-*   **Manual Nginx**: Use `deployment/nginx.conf` as a template.
+Run the default checks:
 
-Optional VPS deployment:
+```bash
+npm test
+```
 
-1.  Copy the example config.
-    ```bash
-    cp deployment/deploy.config.example deployment/deploy.config
-    ```
+Run the benchmark helper:
 
-2.  Fill in your server, SSH key, domain, and remote directory.
+```bash
+npm run benchmark
+```
 
-3.  Run the deploy script.
-    ```bash
-    ./deployment/deploy.sh
-    ```
+Some browser-oriented verification files in `tests/` are meant to be opened through the same local HTTP server used to play the game.
 
-The deploy script intentionally reads from ignored local config. No server IPs, SSH keys, deployment tokens, or webhooks should be committed.
+## Deployment
+
+This is a static web project. Any host that can serve HTML, CSS, JavaScript, images, and MP3 files can host it.
+
+Common options:
+
+*   GitHub Pages, Netlify, Vercel, Cloudflare Pages, S3 static hosting, or any similar static host.
+*   A VPS with Nginx using the templates in `deployment/`.
+*   A custom deployment workflow based on `deployment/github-actions-deploy.example.yml`.
+
+For VPS hosting, start with:
+
+```bash
+cp deployment/deploy.config.example deployment/deploy.config
+```
+
+Fill in your server details, then run:
+
+```bash
+./deployment/deploy.sh
+```
 
 More deployment references:
 
-*   Full VPS setup: [deployment/VPS_SETUP.md](deployment/VPS_SETUP.md)
+*   Full VPS guide: [deployment/VPS_SETUP.md](deployment/VPS_SETUP.md)
 *   Nginx template: [deployment/nginx.conf](deployment/nginx.conf)
-*   Inactive GitHub Actions template: [deployment/github-actions-deploy.example.yml](deployment/github-actions-deploy.example.yml)
+*   GitHub Actions template: [deployment/github-actions-deploy.example.yml](deployment/github-actions-deploy.example.yml)
 
----
+Keep private server values in ignored local files such as `deployment/deploy.config`. Do not commit SSH keys, tokens, IP-specific configs, `.env` files, or generated logs.
 
-## Project Hygiene
+## Contributing
 
-Public-release cleanup expectations:
-
-*   Keep private deployment values in `deployment/deploy.config`.
-*   Keep `.env`, SSH keys, certificates, local editor settings, release archives, screenshots, and OS metadata out of git.
-*   Use `deployment/github-actions-deploy.example.yml` only as a template. It is not active unless copied into `.github/workflows/`.
-*   Replace sample domains, paths, and repository URLs before publishing your own fork.
-*   Run `npm test` before release changes.
-
----
+Fork the project, make your changes, and run `npm test` before opening a pull request. Keep changes focused, and avoid committing local deployment files or generated artifacts.
 
 ## License
 
-This project is released under the [Unlicense](LICENSE). You may use, copy, modify, publish, distribute, sell, or reuse it for personal or commercial work without attribution requirements.
+This project is released under the [Unlicense](LICENSE). You can use, modify, distribute, publish, or sell it for personal or commercial work without attribution requirements.

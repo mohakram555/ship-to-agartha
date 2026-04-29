@@ -34,6 +34,7 @@ check('collectible marker uses canvas icon drawing', /drawIcon\(ctx, 'heart'/.te
 check('README references a main menu screenshot', readme.includes('assets/screenshots/main_menu.png'));
 check('README references a gameplay screenshot', readme.includes('assets/screenshots/gameplay.png'));
 check('README references a boss screenshot', readme.includes('assets/screenshots/level_30_boss.png'));
+check('README uses a natural project format instead of a technical report', !readme.includes('Technical Report') && !readme.includes('Technical & Release Report') && readme.includes('## Play Locally') && readme.includes('## Controls'));
 check('main menu screenshot exists', fs.existsSync('assets/screenshots/main_menu.png'));
 check('gameplay screenshot exists', fs.existsSync('assets/screenshots/gameplay.png'));
 check('boss screenshot exists', fs.existsSync('assets/screenshots/level_30_boss.png'));
